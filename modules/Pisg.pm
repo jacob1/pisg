@@ -172,6 +172,7 @@ sub get_default_config_settings
         showmostactivebyhour => 0,
         showmostactivebyhourgraph => 1,
         showonlytop => 0,
+        showgendercolors => 0,
 
         # Less important things
 

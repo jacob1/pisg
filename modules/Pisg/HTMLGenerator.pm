@@ -624,13 +624,17 @@ sub _activenicks
         my $output = "";
         $output .= "<td $style>";
 
-        # Hilight nick with gendercolors
-        if ($sex and $sex eq 'm') {
-            $output .= "<span class=\"male\">";
-        } elsif ($sex and $sex eq 'f') {
-            $output .= "<span class=\"female\">";
-        } elsif ($sex and $sex eq 'b') {
-            $output .= "<span class=\"bot\">";
+        if ($self->{cfg}->{showgendercolors}) {
+            # Hilight nick with gendercolors
+            if ($sex and $sex eq 'm') {
+                $output .= "<span class=\"male\">";
+            } elsif ($sex and $sex eq 'f') {
+                $output .= "<span class=\"female\">";
+            } elsif ($sex and $sex eq 'b') {
+                $output .= "<span class=\"bot\">";
+            } else {
+                $output .= "<span>";
+            }
         } else {
             $output .= "<span>";
         }
@@ -710,12 +714,16 @@ sub _activenicks
                 my $output = "";
                 $output .= "<td class=\"rankc10\">";
 
-                if ($sex and $sex eq 'm') {
-                    $output .= "<span class=\"male\">";
-                } elsif ($sex and $sex eq 'f') {
-                    $output .= "<span class=\"female\">";
-                } elsif ($sex and $sex eq 'b') {
-                    $output .= "<span class=\"bot\">";
+                if ($self->{cfg}->{showgendercolors}) {
+                    if ($sex and $sex eq 'm') {
+                        $output .= "<span class=\"male\">";
+                    } elsif ($sex and $sex eq 'f') {
+                        $output .= "<span class=\"female\">";
+                    } elsif ($sex and $sex eq 'b') {
+                        $output .= "<span class=\"bot\">";
+                    } else {
+                        $output .= "<span>";
+                    }
                 } else {
                     $output .= "<span>";
                 }
