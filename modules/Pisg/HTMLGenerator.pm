@@ -135,6 +135,10 @@ sub create_output
         _html("</table>"); # Needed for sections
     }
 
+    if ($self->{cfg}->{showlykos}) {
+        $self->_lykosstats();
+    }
+
     if ($self->{cfg}->{showmostnicks}) {
         $self->_mostnicks();
     }
@@ -224,8 +228,8 @@ sub _htmlheader
         {
             local $/; # enable "slurp" mode
             $CSS = "<style type=\"text/css\" title=\"$self->{cfg}->{colorscheme}\">\n". <FILE>. "</style>";
-			$CSS =~ s/\/\*/\/\* <!--/g;
-			$CSS =~ s/\*\//--> \*\//g;
+            $CSS =~ s/\/\*/\/\* <!--/g;
+            $CSS =~ s/\*\//--> \*\//g;
         }
         close FILE;
     }
@@ -1849,6 +1853,49 @@ sub _mostwordsperline
         _html("<br /><span class=\"small\">$text</span>");
         _html("</td></tr>");
     }
+}
+
+sub _lykosstats
+{
+    my $self = shift;
+
+    $self->_headline("Lykos Statistics");
+    _html("<table border=\"0\" width=\"$self->{cfg}->{tablewidth}\">");
+
+    #show team wins (WIP)
+    if ($self->{stats}->{wolfwins} and $self->{stats}->{villagewins}) {
+        _html("<tr><td class=\"hicell\">The wolves have $self->{stats}->{wolfwins} wins in this time period");
+        _html("<br /><span class=\"small\">Meanwhile, the village won $self->{stats}->{villagewins} games</span>");
+        _html("</td></tr>");
+    }
+
+    #shot top idlers (WIP, does this account for nick changes)
+    my %idle = ();
+    foreach my $nick (keys %{ $self->{stats}->{idles} }) {
+        if ($self->{topactive}{$nick} || !$self->{cfg}->{showonlytop}) {
+          $idle{$nick} = $self->{stats}->{idles}{$nick};
+        }
+    }
+    my @idle = sort { $idle{$b} <=> $idle{$a} } keys %idle;
+    if (scalar @idle > 1) {
+        _html("<tr><td class=\"hicell\">It seems <strong>$idle[0]</strong> is always pulling an auror, with $idle{$idle[0]} idles.");
+        _html("<br /><span class=\"small\"><strong>$idle[1]</strong> is the second biggest idler, with $idle{$idle[1]} idles.</span></td></tr>");
+    }
+
+    #show the top people killed at night
+    my %killed = ();
+    foreach my $nick (keys %{ $self->{stats}->{wolfkills} }) {
+        if ($self->{topactive}{$nick} || !$self->{cfg}->{showonlytop}) {
+          $killed{$nick} = $self->{stats}->{wolfkills}{$nick};
+        }
+    }
+    my @killed = sort { $killed{$b} <=> $killed{$a} } keys %killed;
+    if (scalar @killed > 1) {
+        _html("<tr><td class=\"hicell\"><strong>$killed[0]</strong> must be a good player, they were targeted by wolves $killed{$killed[0]} times.");
+        _html("<br /><span class=\"small\"><strong>$killed[1]</strong> is also a popular wolf target, with $killed{$killed[1]} deaths.</span></td></tr>");
+    }
+
+    _html("</table>");
 }
 
 sub _mostreferencednicks

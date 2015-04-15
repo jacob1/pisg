@@ -124,6 +124,8 @@ sub analyze
         day_times => [ undef ],
         parsedlines => 0,
         totallines => 0,
+        villagewins => 0,
+        wolfwins => 0,
     );
 
     if ($self->{cfg}->{cachedir} and not -d $self->{cfg}->{cachedir}) {
@@ -142,6 +144,8 @@ sub analyze
             lastnick => '',
             parsedlines => 0,
             totallines => 0,
+            villagewins => 0,
+            wolfwins => 0,
         };
         my $l = {};
 
@@ -346,6 +350,26 @@ sub _parse_file
                 }
                 $stats->{oldtime} = $hour;
 
+                if ($nick eq "lykos") {
+                    if (index($saying, "Welcome to Werewolf, the popular detective/social party game (a theme of Mafia)") != -1) {
+                        #$stats->{ingame} = 1;
+                    }
+                    if (index($saying, "Game over!") != -1) {
+                        #$stats->{ingame} = 0;
+                        if (index($saying, "The villagers chop them up, BBQ them, and have a hearty meal.") != -1) {
+                            $stats->{villagewins} ++;
+                        }
+                        if (index($saying, "The wolves overpower the villagers and win.") != -1) {
+                            $stats->{wolfwins} ++;
+                        }
+                    }
+                    if ($saying =~ "(.+) didn't get out of bed for a very long time and has been found dead. The survivors bury the (.+)'s body.") {
+                        $stats->{idles}{$1} ++;
+                    }
+                    if ($saying =~ "The dead body of (.+), a (.+), is found. Those remaining mourn the tragedy.") {
+                        $stats->{wolfkills}{$1} ++;
+                    }
+                }
                 if (!is_ignored($nick)) {
                     $stats->{parsedlines}++;
 
@@ -846,7 +870,7 @@ sub _merge_stats
         #print "$key -> $s->{$key}\n";
         if ($key =~ /^(logfile|firsttime|days|version)/) { # don't merge these
             next;
-        } elsif ($key =~ /^(oldtime|lastnick|lastnormal|monocount)$/) { # {key} = int/str: copy
+        } elsif ($key =~ /^(oldtime|lastnick|lastnormal|monocount|wolfkills|villagewins|wolfwins)$/) { # {key} = int/str: copy
             $stats->{$key} = $s->{$key};
         } elsif ($key =~ /^(parsedlines|totallines)$/) { # {key} = int: add
             $stats->{$key} += $s->{$key};
