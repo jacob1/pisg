@@ -3,6 +3,7 @@ package Pisg::Parser::Format::xchat;
 # Documentation for the Pisg::Parser::Format modules is found in Template.pm
 
 # This module supports both the old and new logformat (after 1.8.7)
+# It also supports hexchat, which has a slightly different timestamp format
 
 use strict;
 $^W = 1;
@@ -12,9 +13,9 @@ sub new
     my ($type, %args) = @_;
     my $self = {
         cfg => $args{cfg},
-        normalline => '(\d+):\d+:\d+ <[@%+~&]?([^>\s]+)>\s+(.*)',
-        actionline => '(\d+):\d+:\d+ \*{1,}\s+(\S+) (.*)',
-        thirdline  => '(\d+):(\d+):\d+ [<-]-[->]\s+(\S+) (\S+) (\S+) (\S+) ((\S+)\s*(\S+)?\s*(.*)?)',
+        normalline => '\[?(\d+):\d+:\d+\]? <[@%+~&]?([^>\s]+)>\s+(.*)',
+        actionline => '\[?(\d+):\d+:\d+\]? \*{1,}\s+(\S+) (.*)',
+        thirdline  => '\[?(\d+):(\d+):\d+\]? [<-]-[->]\s+(\S+) (\S+) (\S+) (\S+) ((\S+)\s*(\S+)?\s*(.*)?)',
     };
 
     bless($self, $type);
