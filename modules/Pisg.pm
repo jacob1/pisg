@@ -99,6 +99,7 @@ sub get_default_config_settings
         outputfile => 'index.html',
         outputtag => '',
         maintainer => 'MAINTAINER',
+        timezone => '',
         pagehead => 'none',
         pagefoot => 'none',
         configfile => 'pisg.cfg',

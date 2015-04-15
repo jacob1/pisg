@@ -254,7 +254,7 @@ HTML
     }
     _html("<span class=\"title\">$title</span><br />");
     _html("<br />");
-    _html($self->_template_text('pagetitle2', %hash) . " " . $self->get_time());
+    _html($self->_template_text('pagetitle2', %hash) . " " . $self->get_time() . " " . $self->{cfg}->{timezone});
 
     _html("<br />" . $self->_template_text('pagetitle3', %hash) . "<br /><br />");
 
