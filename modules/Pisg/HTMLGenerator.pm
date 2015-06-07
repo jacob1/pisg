@@ -1930,7 +1930,7 @@ sub _gamemodestats
         if (exists $self->{stats}->{gamemodevotes}{$mode}) {
             _html("<td class=\"hicell\">$self->{stats}->{gamemodevotes}{$mode}</td>");
         } else {
-            _html("<td class=\"hicell\">&nbsp;</td>");
+            _html("<td class=\"hicell\">0</td>");
         }
         _html("</tr>");
     }
