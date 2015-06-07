@@ -300,6 +300,8 @@ sub _parse_file
         open (LOGFILE, $file) or
         die("$0: Unable to open logfile($file): $!\n");
     }
+    # blame ilbelkyr for this
+    my %fake_game_modes = map { $_ => 1 } qw(roles trollish robottakeover butitsfun tableflip potato hugs whydontyouuseawhitelistinstead fake blacklistsarefutile nogoatspls drat parsingmylinesisbadandyoushouldfeelbad ifyouseethisjacob1stilldidntfixhiscode);
 
     while(my $line = <LOGFILE>) {
         $line = _strip_mirccodes($line);
@@ -368,6 +370,14 @@ sub _parse_file
                     }
                     if ($saying =~ "The dead body of (.+), a (.+), is found. Those remaining mourn the tragedy.") {
                         $stats->{wolfkills}{$1} ++;
+                    }
+                    if ($saying =~ "Using the (.+) game mode.") {
+                         $stats->{gamemodes}{$1} ++;
+                    }
+                    if ($saying =~ "(.+) votes for the (.+) game mode.") {
+                         if (!$fake_game_modes{$2}) {
+                         	$stats->{gamemodevotes}{$2} ++;
+                         }
                     }
                 }
                 if (!is_ignored($nick)) {

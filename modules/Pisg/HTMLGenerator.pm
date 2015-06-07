@@ -137,6 +137,7 @@ sub create_output
 
     if ($self->{cfg}->{showlykos}) {
         $self->_lykosstats();
+        $self->_gamemodestats();
     }
 
     if ($self->{cfg}->{showmostnicks}) {
@@ -1859,7 +1860,7 @@ sub _lykosstats
 {
     my $self = shift;
 
-    $self->_headline("Lykos Statistics");
+    $self->_headline("Lykos statistics");
     _html("<table border=\"0\" width=\"$self->{cfg}->{tablewidth}\">");
 
     #show team wins (WIP)
@@ -1895,6 +1896,62 @@ sub _lykosstats
         _html("<br /><span class=\"small\"><strong>$killed[1]</strong> is also a popular wolf target, with $killed{$killed[1]} deaths.</span></td></tr>");
     }
 
+    _html("</table>");
+}
+
+sub _gamemodestats
+{
+    my $self = shift;
+
+    $self->_headline("Game mode statistics");
+    _html("<table border=\"0\" width=\"$self->{cfg}->{tablewidth}\">");
+    _html("<td>&nbsp;</td><td class=\"tdtop\"><b>Game mode</b></td>");
+    _html("<td class=\"tdtop\"><b>Times picked</b></td>");
+    _html("<td class=\"tdtop\"><b>Times voted for</b></td></tr>");
+
+    my %gamemodes = ();
+    foreach my $mode (keys %{ $self->{stats}->{gamemodes} }) {
+        $gamemodes{$mode} = $self->{stats}->{gamemodes}{$mode};
+    }
+    my @gamemodes = sort { $gamemodes{$b} <=> $gamemodes{$a} } keys %gamemodes;
+    my $i = 0;
+    foreach my $mode (@gamemodes) {
+        $i ++;
+        my $class;
+        if ($i == 1) {
+            $class = 'hirankc';
+        } else {
+            $class = 'rankc';
+        }
+        _html("<tr>");
+        _html("<td class=\"$class\">$i</td>");
+        _html("<td class=\"hicell\">$mode</td>");
+        _html("<td class=\"hicell\">$gamemodes{$mode}</td>");
+        if (exists $self->{stats}->{gamemodevotes}{$mode}) {
+            _html("<td class=\"hicell\">$self->{stats}->{gamemodevotes}{$mode}</td>");
+        } else {
+            _html("<td class=\"hicell\">&nbsp;</td>");
+        }
+        _html("</tr>");
+    }
+
+    # add any game modes that were voted but not picked to the list also
+    my %gamemodevotes = ();
+    foreach my $mode (keys %{ $self->{stats}->{gamemodevotes} }) {
+        if (!exists $self->{stats}->{gamemodes}{$mode}) {
+            $gamemodevotes{$mode} = $self->{stats}->{gamemodevotes}{$mode};
+        }
+    }
+    my @gamemodevotes = sort { $gamemodevotes{$b} <=> $gamemodevotes{$a} } keys %gamemodevotes;
+    foreach my $mode (@gamemodevotes) {
+        $i ++;
+        _html("<tr>");
+        _html("<td class=\"rankc\">$i</td>");
+        _html("<td class=\"hicell\">$mode</td>");
+        _html("<td class=\"hicell\">0</td>");
+        _html("<td class=\"hicell\">$gamemodevotes{$mode}</td>");
+        _html("</tr>");
+    }
     _html("</table>");
 }
 
