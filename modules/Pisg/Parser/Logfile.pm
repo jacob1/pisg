@@ -301,7 +301,7 @@ sub _parse_file
         die("$0: Unable to open logfile($file): $!\n");
     }
     # blame ilbelkyr for this
-    my %fake_game_modes = map { $_ => 1 } qw(roles trollish robottakeover butitsfun tableflip potato hugs whydontyouuseawhitelistinstead fake blacklistsarefutile nogoatspls drat parsingmylinesisbadandyoushouldfeelbad ifyouseethisjacob1stilldidntfixhiscode);
+    my %fake_game_modes = map { $_ => 1 } qw/roles trollish robottakeover butitsfun tableflip potato hugs whydontyouuseawhitelistinstead fake blacklistsarefutile nogoatspls drat parsingmylinesisbadandyoushouldfeelbad ifyouseethisjacob1stilldidntfixhiscode tiny bushdid911 ('rapidfire', 1) ('drunkfire', 1)/;
 
     while(my $line = <LOGFILE>) {
         $line = _strip_mirccodes($line);
