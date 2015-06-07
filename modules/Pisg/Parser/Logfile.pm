@@ -446,8 +446,12 @@ sub _parse_file
                     if ($saying =~ /^(\S+[^\s+=-])(\+\+|==|--)$/) {
                         my $thing = lc $1;
                         my $k = $2 eq "++" ? 1 : ($2 eq "==" ? 0 : -1);
-                        $stats->{karma}{$thing}{$nick} += $k
-                            if $thing =~ /\w\W*?\w/ and !is_ignored($thing) and $thing ne lc($nick);
+                        if ($k == 0) {
+                            $stats->{karma}{$thing}{$nick} = 0
+                        } else {
+                            $stats->{karma}{$thing}{$nick} += $k
+                                if $thing =~ /\w\W*?\w/ and !is_ignored($thing) and $thing ne lc($nick);
+                        }
                     }
 
                     # Find URLs
