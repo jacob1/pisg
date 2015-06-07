@@ -870,9 +870,9 @@ sub _merge_stats
         #print "$key -> $s->{$key}\n";
         if ($key =~ /^(logfile|firsttime|days|version)/) { # don't merge these
             next;
-        } elsif ($key =~ /^(oldtime|lastnick|lastnormal|monocount|wolfkills|villagewins|wolfwins)$/) { # {key} = int/str: copy
+        } elsif ($key =~ /^(oldtime|lastnick|lastnormal|monocount)$/) { # {key} = int/str: copy
             $stats->{$key} = $s->{$key};
-        } elsif ($key =~ /^(parsedlines|totallines)$/) { # {key} = int: add
+        } elsif ($key =~ /^(parsedlines|totallines|villagewins|wolfwins)$/) { # {key} = int: add
             $stats->{$key} += $s->{$key};
         } elsif ($key =~ /^(wordnicks|word_upcase|urlnicks|chartnicks|smileynicks)$/) { # {key}->{} = str: copy
             foreach my $subkey (keys %{$s->{$key}}) {

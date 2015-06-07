@@ -1891,7 +1891,7 @@ sub _lykosstats
     }
     my @killed = sort { $killed{$b} <=> $killed{$a} } keys %killed;
     if (scalar @killed > 1) {
-        _html("<tr><td class=\"hicell\"><strong>$killed[0]</strong> must be a good player, they were targeted by wolves $killed{$killed[0]} times.");
+        _html("<tr><td class=\"hicell\"><strong>$killed[0]</strong> dies a lot, they were targeted by wolves $killed{$killed[0]} times.");
         _html("<br /><span class=\"small\"><strong>$killed[1]</strong> is also a popular wolf target, with $killed{$killed[1]} deaths.</span></td></tr>");
     }
 
