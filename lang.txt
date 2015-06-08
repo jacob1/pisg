@@ -46,7 +46,7 @@
 ### English
 <lang name="EN" charset="us-ascii">
 mostop1 = "<b>[:nick]</b> donated [:ops] ops in the channel..."
-mostop2 = "<b>[:nick]</b> was also very polite: [:ops] ops from [:him:her:]."
+mostop2 = "<b>[:nick]</b> was also very polite: [:ops] ops from [:him:her:them:]."
 mostop3 = "Strange, no op was given on [:channel]!"
 
 mostdeop1 = "<b>[:nick]</b> is the channel sheriff with [:deops] deops."
@@ -54,7 +54,7 @@ mostdeop2 = "<b>[:nick]</b> deoped [:deops] users."
 mostdeop3 = "Wow, no op was taken on [:channel]!"
 
 mostvoice1 = "<b>[:nick]</b> donated [:voices] voices in the channel..."
-mostvoice2 = "<b>[:nick]</b> was also very polite: [:voices] voices from [:him:her:]."
+mostvoice2 = "<b>[:nick]</b> was also very polite: [:voices] voices from [:him:her:them:]."
 mostvoice3 = "Strange, no voices were given on [:channel]!"
 
 mostdevoice1 = "<b>[:nick]</b> likes taking voice from people, [:devoices] devoices."
@@ -62,38 +62,38 @@ mostdevoice2 = "<b>[:nick]</b> was close to the same, devoiced [:devoices] users
 mostdevoice3 = "No voices were taken on [:channel]!"
 
 mosthalfop1 = "<b>[:nick]</b> donated [:halfops] halfops in the channel..."
-mosthalfop2 = "<b>[:nick]</b> was also very polite: [:halfops] halfops from [:him:her:]."
+mosthalfop2 = "<b>[:nick]</b> was also very polite: [:halfops] halfops from [:him:her:them:]."
 mosthalfop3 = "Strange, no halfop was given on [:channel]!"
 
 mostdehalfop1 = "<b>[:nick]</b> is the channel sheriff with [:dehalfops] dehalfops."
 mostdehalfop2 = "<b>[:nick]</b> dehalfoped [:dehalfops] users."
 mostdehalfop3 = "Wow, no halfop was taken on [:channel]!"
 
-action1 = "<b>[:nick]</b> always lets us know what [:he:she:]'s doing: [:actions] actions!"
+action1 = "<b>[:nick]</b> always lets us know what [:he's:she's:they're:] doing: [:actions] actions!"
 action2 = "Also, <b>[:nick]</b> tells us what's up with [:actions] actions."
 action3 = "No actions in [:channel]!"
 actiontext = "<b>For example, like this:</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[:line]"
 
 question1 = "Is <b>[:nick]</b> stupid or just asking too many questions?  [:per]% lines contained a question!"
-question2 = "<b>[:nick]</b> didn't know that much either.  [:per]% of [:his:her:] lines were questions."
+question2 = "<b>[:nick]</b> didn't know that much either.  [:per]% of [:his:her:their:] lines were questions."
 question3 = "Nobody asked questions here; just geniuses in this channel?"
 
 shout1 = "The loudest one was <b>[:nick]</b>, who yelled [:per]% of the time!"
 shout2 = "Another <i>old yeller</i> was <b>[:nick]</b>, who shouted [:per]% of the time!"
 shout3 = "Nobody shouted at all, wow."
 
-allcaps1 = "It seems that <b>[:nick]</b>'s shift-key is hanging:  [:per]% of the time [:he:she:] wrote UPPERCASE."
-allcaps2 = "<b>[:nick]</b> just forgot to deactivate [:his:her:] Caps-Lock.  [:He:She:] wrote UPPERCASE [:per]% of the time."
+allcaps1 = "It seems that <b>[:nick]</b>'s shift-key is hanging:  [:per]% of the time [:he:she:they:] wrote UPPERCASE."
+allcaps2 = "<b>[:nick]</b> just forgot to deactivate [:his:her:their:] Caps-Lock.  [:He:She:They:] wrote UPPERCASE [:per]% of the time."
 allcaps3 = "Everybody had their shift-key under control.  :)"
 allcapstext = "<b>For example, like this:</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[:line]"
 
-violent1 = "<b>[:nick]</b> is a very aggressive person.  [:He:She:] attacked others <b>[:attacks]</b> times."
-violent2 = "<b>[:nick]</b> can't control [:his:her:] aggressions, either.  [:He:She:] picked on others <b>[:attacks]</b> times."
+violent1 = "<b>[:nick]</b> is a very aggressive person.  [:He:She:They:] attacked others <b>[:attacks]</b> times."
+violent2 = "<b>[:nick]</b> can't control [:his:her:their:] aggressions, either.  [:He:She:They:] picked on others <b>[:attacks]</b> times."
 violent3 = "Nobody beat anyone up.  Everybody was friendly."
 violenttext = "<b>For example, like this:</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[:line]"
 
-attacked1 = "Poor <b>[:nick]</b>, nobody likes [:him:her:].  [:He:She:] was attacked <b>[:attacks]</b> times."
-attacked2 = "<b>[:nick]</b> seems to be unliked too.  [:He:She:] got beaten <b>[:attacks]</b> times."
+attacked1 = "Poor <b>[:nick]</b>, nobody likes [:him:her:them:].  [:He was:She was:They were:] attacked <b>[:attacks]</b> times."
+attacked2 = "<b>[:nick]</b> seems to be unliked too.  [:He:She:They:] got beaten <b>[:attacks]</b> times."
 attackedtext = "<b>For example, like this:</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[:line]"
 
 gotkick1 = "<b>[:nick]</b> wasn't very popular, getting kicked [:kicks] times!"
@@ -110,7 +110,7 @@ words1 = "<b>[:nick]</b> spoke a total of [:words] words!"
 words2 = "[:oldnick]'s faithful follower, <b>[:nick]</b>, didn't speak so much: [:words] words."
 words3 = "Nobody said anything...  What a strange channel..."
 
-mono1 = "<b>[:nick]</b> talks to [:him:her:]self a lot.  [:He:She:] wrote over 5 lines in a row [:monos] times!"
+mono1 = "<b>[:nick]</b> talks to [:himself:herself:themselves:] a lot.  [:He:She:They:] wrote over 5 lines in a row [:monos] times!"
 mono2 = "Another lonely one was <b>[:nick]</b>, who managed to hit [:monos] times."
 
 wpl1 = "<b>[:nick]</b> wrote an average of [:wpl] words per line."
