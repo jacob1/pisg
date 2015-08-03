@@ -1879,8 +1879,9 @@ sub _lykosstats
     }
     my @idle = sort { $idle{$b} <=> $idle{$a} } keys %idle;
     if (scalar @idle > 1) {
-        _html("<tr><td class=\"hicell\">It seems <strong>$idle[0]</strong> is always pulling an auror, with $idle{$idle[0]} idles.");
-        _html("<br /><span class=\"small\"><strong>$idle[1]</strong> is the second biggest idler, with $idle{$idle[1]} idles.</span></td></tr>");
+        # "pulling an auror" <- redacted due to complaints
+        _html("<tr><td class=\"hicell\">It seems <strong>$idle[0]</strong> is always [DATA EXPUNGED], with $idle{$idle[0]} idles.");
+        _html("<br /><span class=\"small\"><strong>$idle[1]</strong> also never pays attention, with $idle{$idle[1]} idles.</span></td></tr>");
     }
 
     #show the top people killed at night
