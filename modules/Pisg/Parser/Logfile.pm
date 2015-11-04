@@ -372,12 +372,16 @@ sub _parse_file
                         $stats->{wolfkills}{$1} ++;
                     }
                     if ($saying =~ "Using the (.+) game mode.") {
-                         $stats->{gamemodes}{$1} ++;
+                        if ($1 eq "random_reveal" or $1 eq "random_noreveal") {
+                            $stats->{gamemodes}{"random"} ++;
+                        } else {
+                            $stats->{gamemodes}{$1} ++;
+                        }
                     }
                     if ($saying =~ "(.+) votes for the (.+) game mode.") {
-                         if (!$fake_game_modes{$2}) {
-                         	$stats->{gamemodevotes}{$2} ++;
-                         }
+                        if (!$fake_game_modes{$2}) {
+                            $stats->{gamemodevotes}{$2} ++;
+                        }
                     }
                 }
                 if (!is_ignored($nick)) {
@@ -454,11 +458,11 @@ sub _parse_file
 
                     # require 2 chars (catches C++), nick must not end in [+=-]
                     if ($saying =~ /^(\S+[^\s+=-])(\+\+|==|--)$/) {
-                        my $thing = lc $1;
+                        my $thing = lc find_alias($1);
                         my $k = $2 eq "++" ? 1 : ($2 eq "==" ? 0 : -1);
                         if ($k == 0) {
                             $stats->{karma}{$thing}{$nick} = 0
-                        } else {
+                        } elsif ($nick ne "evilwolf" and $nick ne "g4vr0che" and $nick ne "gav" and $nick ne "gingermouse" and $nick ne "sourisrouge" and $nick ne "AntiSpamMeta" and $thing ne "gav") {
                             $stats->{karma}{$thing}{$nick} += $k
                                 if $thing =~ /\w\W*?\w/ and !is_ignored($thing) and $thing ne lc($nick);
                         }
