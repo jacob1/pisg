@@ -365,20 +365,26 @@ sub _parse_file
                             $stats->{wolfwins} ++;
                         }
                     }
-                    if ($saying =~ "(.+) didn't get out of bed for a very long time and has been found dead. The survivors bury the (.+)'s body.") {
-                        $stats->{idles}{$1} ++;
+                    if ($saying =~ "([^ ]+) didn't get out of bed for a very long time and has been found dead. The survivors bury the (.+)'s body.") {
+                        my $thing = lc find_alias($1);
+                        if (!is_ignored($thing)) {
+                            $stats->{idles}{$thing} ++;
+                        }
                     }
-                    if ($saying =~ "The dead body of (.+), a (.+), is found. Those remaining mourn the tragedy.") {
-                        $stats->{wolfkills}{$1} ++;
+                    if ($saying =~ "The dead body of ([^ ]+), a (.+), is found. Those remaining mourn the tragedy.") {
+                        my $thing = lc find_alias($1);
+                        if (!is_ignored($thing)) {
+                            $stats->{wolfkills}{$thing} ++;
+                        }
                     }
-                    if ($saying =~ "Using the (.+) game mode.") {
+                    if ($saying =~ "Using the ([^ ]+) game mode.") {
                         if ($1 eq "random_reveal" or $1 eq "random_noreveal") {
                             $stats->{gamemodes}{"random"} ++;
-                        } else {
+                        } elsif ($1 ne "notactualstart" ) {
                             $stats->{gamemodes}{$1} ++;
                         }
                     }
-                    if ($saying =~ "(.+) votes for the (.+) game mode.") {
+                    if ($saying =~ "([^ ]+) votes for the ([^ ]+) game mode.") {
                         if (!$fake_game_modes{$2}) {
                             $stats->{gamemodevotes}{$2} ++;
                         }
