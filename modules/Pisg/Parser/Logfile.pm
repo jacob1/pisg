@@ -468,7 +468,7 @@ sub _parse_file
                         my $k = $2 eq "++" ? 1 : ($2 eq "==" ? 0 : -1);
                         if ($k == 0) {
                             $stats->{karma}{$thing}{$nick} = 0
-                        } elsif ($nick ne "evilwolf" and $nick ne "g4vr0che" and $nick ne "gav" and $nick ne "gingermouse" and $nick ne "sourisrouge" and $nick ne "AntiSpamMeta" and $thing ne "gav") {
+                        } elsif ($nick ne "evilwolf" and $nick ne "g4vr0che" and $nick ne "gav" and $nick ne "gingermouse" and $nick ne "sourisrouge" and $nick ne "AntiSpamMeta" and $thing ne "gav" and $thing ne "freenode") {
                             $stats->{karma}{$thing}{$nick} += $k
                                 if $thing =~ /\w\W*?\w/ and !is_ignored($thing) and $thing ne lc($nick);
                         }
