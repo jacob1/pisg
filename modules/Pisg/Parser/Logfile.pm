@@ -466,11 +466,17 @@ sub _parse_file
                     if ($saying =~ /^(\S+[^\s+=-])(\+\+|==|--)$/) {
                         my $thing = lc find_alias($1);
                         my $k = $2 eq "++" ? 1 : ($2 eq "==" ? 0 : -1);
-                        if ($k == 0) {
-                            $stats->{karma}{$thing}{$nick} = 0
-                        } elsif ($nick ne "evilwolf" and $nick ne "AntiSpamMeta" and $nick and $thing ne "gav") {
-                            $stats->{karma}{$thing}{$nick} += $k
-                                if $thing =~ /\w\W*?\w/ and !is_ignored($thing) and $thing ne lc($nick);
+                        if (not exists $stats->{karmatime}{$nick}{$thing}) {
+                            $stats->{karmatime}{$nick}{$thing} = -1;
+                        }
+                        if ($stats->{karmatime}{$nick}{$thing} != $hour) {
+                            $stats->{karmatime}{$nick}{$thing} = $hour;
+                            if ($k == 0) {
+                                $stats->{karma}{$thing}{$nick} = 0
+                            } elsif ($nick ne "evilwolf" and $nick ne "AntiSpamMeta" and $nick and $thing ne "gav") {
+                                $stats->{karma}{$thing}{$nick} += $k
+                                    if $thing =~ /\w\W*?\w/ and !is_ignored($thing) and $thing ne lc($nick);
+                            }
                         }
                     }
 
@@ -902,7 +908,7 @@ sub _merge_stats
             foreach my $subkey (keys %{$s->{$key}}) {
                 $stats->{$key}->{$subkey} = $s->{$key}->{$subkey};
             }
-        } elsif ($key =~ /^(nicks|karma)$/) { # {key}->{}->{} = str: copy
+        } elsif ($key =~ /^(nicks|karma|karmatime)$/) { # {key}->{}->{} = str: copy
             foreach my $subkey (keys %{$s->{$key}}) {
                 foreach my $value (keys %{$s->{$key}->{$subkey}}) {
                     $stats->{$key}->{$subkey}->{$value} = $s->{$key}->{$subkey}->{$value};
