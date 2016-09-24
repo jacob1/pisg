@@ -301,7 +301,7 @@ sub _parse_file
         die("$0: Unable to open logfile($file): $!\n");
     }
     # blame ilbelkyr for this
-    my %fake_game_modes = map { $_ => 1 } qw/roles trollish robottakeover butitsfun tableflip potato hugs whydontyouuseawhitelistinstead fake blacklistsarefutile nogoatspls drat parsingmylinesisbadandyoushouldfeelbad ifyouseethisjacob1stilldidntfixhiscode tiny bushdid911/;
+    my %fake_game_modes = map { $_ => 1 } qw/roles trollish robottakeover butitsfun tableflip potato hugs whydontyouuseawhitelistinstead fake blacklistsarefutile nogoatspls drat parsingmylinesisbadandyoushouldfeelbad ifyouseethisjacob1stilldidntfixhiscode tiny bushdid911 defenestration/;
 
     while(my $line = <LOGFILE>) {
         $line = _strip_mirccodes($line);
@@ -352,7 +352,7 @@ sub _parse_file
                 }
                 $stats->{oldtime} = $hour;
 
-                if ($nick eq "lykos") {
+                if ($nick eq "lykos" || $nick eq "skoll") {
                     if (index($saying, "Welcome to Werewolf, the popular detective/social party game (a theme of Mafia)") != -1) {
                         #$stats->{ingame} = 1;
                     }
